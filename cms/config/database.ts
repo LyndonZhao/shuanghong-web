@@ -48,6 +48,8 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
         filename: path.join(__dirname, '..', '..', env('DATABASE_FILENAME', '.tmp/data.db')),
       },
       useNullAsDefault: true,
+      // SQLite single connection pool + WAL mode pragma (see config/database-extra.ts)
+      pool: { min: 0, max: 1 },
     },
   };
 

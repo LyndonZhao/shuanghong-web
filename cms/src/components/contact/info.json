@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_contact_infos",
+  "info": {
+    "displayName": "Contact",
+    "description": "联系方式"
+  },
+  "options": {},
+  "attributes": {
+    "phone": {
+      "type": "string",
+      "default": "0XX-XXXXXXXX"
+    },
+    "email": {
+      "type": "email",
+      "default": "contact@shuanghongtech.com"
+    },
+    "address": {
+      "type": "string",
+      "default": "XX省XX市XX区XX大厦XX层"
+    },
+    "wechatId": {
+      "type": "string",
+      "default": "13XXXXXXXXX(微信同号)"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_seo_metas",
+  "info": {
+    "displayName": "SEO",
+    "description": "页面 SEO 元数据"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "keywords": {
+      "type": "string"
+    },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}
