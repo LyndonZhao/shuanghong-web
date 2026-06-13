@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inquiries",
+  "info": {
+    "singularName": "inquiry",
+    "pluralName": "inquiries",
+    "displayName": "Inquiry",
+    "description": "询盘表单提交记录"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 50 },
+    "company": { "type": "string", "required": true, "maxLength": 100 },
+    "email": { "type": "email", "required": true },
+    "phone": { "type": "string" },
+    "interest": {
+      "type": "enumeration",
+      "enum": ["multimodal", "ai", "other"],
+      "default": "other"
+    },
+    "message": { "type": "text", "required": true, "maxLength": 1000 },
+    "sourcePage": { "type": "string" },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "processing", "contacted", "closed"],
+      "default": "pending"
+    },
+    "handledBy": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "admin::user"
+    },
+    "handledAt": { "type": "datetime" },
+    "notes": { "type": "text" }
+  }
+}

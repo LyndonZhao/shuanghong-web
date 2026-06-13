@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "site_settings",
+  "info": {
+    "singularName": "site-setting",
+    "pluralName": "site-settings",
+    "displayName": "SiteSetting",
+    "description": "全局站点设置(实际只放 1 条)"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "logoSubtitle": {
+      "type": "string",
+      "default": "多模态交互专家｜智能AI应用普及者"
+    },
+    "navMenu": { "type": "json" },
+    "footerText": { "type": "richtext" },
+    "icpNumber": { "type": "string" },
+    "analyticsBaidu": { "type": "text" },
+    "analyticsGa": { "type": "string" },
+    "contactEmailTo": { "type": "email" }
+  }
+}
