@@ -22,13 +22,37 @@ export default {
    * An asynchronous bootstrap function that runs before
    * your application gets started.
    *
-   * Auto-configure Public role permissions so the Next.js
-   * frontend can fetch content without an API token.
+   * - Auto-configure Public role permissions so the Next.js
+   *   frontend can fetch content without an API token.
+   * - Set the default admin UI language to Simplified Chinese
+   *   for every admin user (idempotent — skips users who
+   *   already have a non-empty `prefered_language`).
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     await ensurePublicPermissions(strapi);
+    await ensureAdminLanguage(strapi);
   },
 };
+
+const DEFAULT_ADMIN_LOCALE = 'zh-Hans';
+
+async function ensureAdminLanguage(strapi: Core.Strapi) {
+  // The DB column is `prefered_language` (single "r" — Strapi's typo).
+  // The Strapi API name is `preferedLanguage` (camelCase).
+  // `updateMany` requires the API name; `where` accepts either.
+  const updated = await strapi.db
+    .query('admin::user')
+    .updateMany({
+      where: { preferedLanguage: { $null: true } },
+      data: { preferedLanguage: DEFAULT_ADMIN_LOCALE },
+    });
+
+  if (updated && updated.count > 0) {
+    strapi.log.info(
+      `[bootstrap] Set admin UI language to "${DEFAULT_ADMIN_LOCALE}" for ${updated.count} user(s)`,
+    );
+  }
+}
 
 async function ensurePublicPermissions(strapi: Core.Strapi) {
   const publicRole = await strapi.db
