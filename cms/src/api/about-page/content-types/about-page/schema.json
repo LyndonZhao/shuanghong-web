@@ -4,7 +4,7 @@
   "info": {
     "singularName": "about-page",
     "pluralName": "about-pages",
-    "displayName": "AboutPage",
+    "displayName": "关于我们",
     "description": "关于双泓页"
   },
   "options": { "draftAndPublish": false },

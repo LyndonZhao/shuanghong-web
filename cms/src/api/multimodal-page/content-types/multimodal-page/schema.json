@@ -4,7 +4,7 @@
   "info": {
     "singularName": "multimodal-page",
     "pluralName": "multimodal-pages",
-    "displayName": "MultimodalPage",
+    "displayName": "多模态交互",
     "description": "多模态交互页"
   },
   "options": { "draftAndPublish": false },

@@ -4,8 +4,8 @@
   "info": {
     "singularName": "inquiry",
     "pluralName": "inquiries",
-    "displayName": "Inquiry",
-    "description": "询盘表单提交记录"
+    "displayName": "询盘",
+    "description": "网站询盘表单提交记录"
   },
   "options": { "draftAndPublish": false },
   "attributes": {

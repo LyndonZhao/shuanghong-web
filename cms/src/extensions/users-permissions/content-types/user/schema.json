@@ -1,0 +1,15 @@
+{
+  "kind": "collectionType",
+  "collectionName": "up_users",
+  "info": {
+    "name": "user",
+    "description": "",
+    "singularName": "user",
+    "pluralName": "users",
+    "displayName": "用户"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {}
+}

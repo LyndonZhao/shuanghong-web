@@ -4,7 +4,7 @@
   "info": {
     "singularName": "ai-application-page",
     "pluralName": "ai-application-pages",
-    "displayName": "AIApplicationPage",
+    "displayName": "AI 应用",
     "description": "智能 AI 应用页"
   },
   "options": { "draftAndPublish": false },
