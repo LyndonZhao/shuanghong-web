@@ -1,0 +1,54 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_page",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "HomePage",
+    "description": "首页"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "heroTitleLine1": {
+      "type": "string",
+      "required": true,
+      "default": "汽车与机器人领域的多模态交互专家"
+    },
+    "heroTitleLine2": {
+      "type": "string",
+      "required": true,
+      "default": "制造及建筑业的智能AI应用普及者"
+    },
+    "heroSubtitle": {
+      "type": "richtext"
+    },
+    "ctaPrimaryLabel": {
+      "type": "string",
+      "default": "多模态交互方案"
+    },
+    "ctaPrimaryLink": {
+      "type": "string",
+      "default": "/multimodal"
+    },
+    "ctaSecondaryLabel": {
+      "type": "string",
+      "default": "智能AI应用解决方案"
+    },
+    "ctaSecondaryLink": {
+      "type": "string",
+      "default": "/ai-application"
+    },
+    "heroBackground": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.meta"
+    }
+  }
+}

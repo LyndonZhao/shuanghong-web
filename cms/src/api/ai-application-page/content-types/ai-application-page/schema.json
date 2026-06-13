@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "ai_application_page",
+  "info": {
+    "singularName": "ai-application-page",
+    "pluralName": "ai-application-pages",
+    "displayName": "AIApplicationPage",
+    "description": "智能 AI 应用页"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "coreAdvantageTitle": {
+      "type": "string",
+      "default": "核心优势:AI智能体集成平台"
+    },
+    "coreAdvantageDesc": {
+      "type": "richtext"
+    },
+    "solutions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::solution.solution"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.meta"
+    }
+  }
+}

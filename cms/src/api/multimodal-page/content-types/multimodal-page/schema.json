@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "multimodal_page",
+  "info": {
+    "singularName": "multimodal-page",
+    "pluralName": "multimodal-pages",
+    "displayName": "MultimodalPage",
+    "description": "多模态交互页"
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "coreAdvantageTitle": {
+      "type": "string",
+      "default": "核心优势:端云协同的多模态交互"
+    },
+    "coreAdvantageDesc": {
+      "type": "richtext"
+    },
+    "solutions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::solution.solution"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.meta"
+    }
+  }
+}
