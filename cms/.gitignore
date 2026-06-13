@@ -5,4 +5,7 @@ node_modules/
 exports/
 .cache/
 build/
+.env
+.env.local
+.env.*.local
 
