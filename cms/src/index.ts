@@ -1,11 +1,20 @@
-// import type { Core } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
+
+const PUBLIC_READ_TYPES = [
+  'api::home-page.home-page',
+  'api::multimodal-page.multimodal-page',
+  'api::ai-application-page.ai-application-page',
+  'api::about-page.about-page',
+  'api::solution.solution',
+  'api::site-setting.site-setting',
+] as const;
+
+const PUBLIC_CREATE_TYPES = ['api::inquiry.inquiry'] as const;
 
 export default {
   /**
    * An asynchronous register function that runs before
    * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
    */
   register(/* { strapi }: { strapi: Core.Strapi } */) {},
 
@@ -13,8 +22,44 @@ export default {
    * An asynchronous bootstrap function that runs before
    * your application gets started.
    *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
+   * Auto-configure Public role permissions so the Next.js
+   * frontend can fetch content without an API token.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    await ensurePublicPermissions(strapi);
+  },
 };
+
+async function ensurePublicPermissions(strapi: Core.Strapi) {
+  const publicRole = await strapi.db
+    .query('plugin::users-permissions.role')
+    .findOne({ where: { type: 'public' } });
+
+  if (!publicRole) {
+    strapi.log.warn('[bootstrap] Public role not found, skipping permission setup');
+    return;
+  }
+
+  for (const action of PUBLIC_READ_TYPES) {
+    await grantAction(strapi, publicRole.id as number, `${action}.find`);
+    await grantAction(strapi, publicRole.id as number, `${action}.findOne`);
+  }
+
+  for (const action of PUBLIC_CREATE_TYPES) {
+    await grantAction(strapi, publicRole.id as number, `${action}.create`);
+  }
+
+  strapi.log.info('[bootstrap] Public role permissions configured');
+}
+
+async function grantAction(strapi: Core.Strapi, roleId: number, action: string) {
+  const existing = await strapi.db
+    .query('plugin::users-permissions.permission')
+    .findOne({ where: { action, role: roleId } });
+
+  if (existing) return;
+
+  await strapi.db.query('plugin::users-permissions.permission').create({
+    data: { action, role: roleId },
+  });
+}
