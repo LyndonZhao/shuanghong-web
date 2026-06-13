@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"pkill -f \\\"next dev\\\" 2>&1; pkill -f \\\"next-server\\\" 2>&1; sleep 2; ss -tlnp 2>&1 | grep 3000 | head -3; echo \\\"killed\\\"\",\"description\":\"Kill Next.js dev server\"}",
+  "error": "Exit code 144",
+  "timestamp": "2026-06-13T01:33:22.123Z",
+  "retry_count": 1
+}

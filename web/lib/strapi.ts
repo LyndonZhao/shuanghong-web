@@ -9,9 +9,6 @@
  *   });
  */
 
-const STRAPI_URL = process.env.STRAPI_URL || 'http://127.0.0.1:1337';
-const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN; // optional, only if R+W via token
-
 export interface FetchOptions {
   /** Next.js ISR revalidation interval in seconds. */
   revalidate?: number | false;
@@ -30,11 +27,19 @@ export class StrapiError extends Error {
   }
 }
 
+function getStrapiUrl(): string {
+  return process.env.STRAPI_URL || 'http://127.0.0.1:1337';
+}
+
+function getStrapiToken(): string | undefined {
+  return process.env.STRAPI_API_TOKEN || undefined;
+}
+
 export async function strapiFetch<T = unknown>(
   path: string,
   { revalidate = 60, tags, populate, params }: FetchOptions = {},
 ): Promise<T> {
-  const url = new URL(path, STRAPI_URL);
+  const url = new URL(path, getStrapiUrl());
 
   if (populate) {
     url.searchParams.append('populate', populate);
@@ -47,7 +52,8 @@ export async function strapiFetch<T = unknown>(
   }
 
   const headers: Record<string, string> = { Accept: 'application/json' };
-  if (STRAPI_TOKEN) headers.Authorization = `Bearer ${STRAPI_TOKEN}`;
+  const token = getStrapiToken();
+  if (token) headers.Authorization = `Bearer ${token}`;
 
   const res = await fetch(url.toString(), {
     headers,

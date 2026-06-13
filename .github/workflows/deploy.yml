@@ -1,0 +1,75 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # allow manual trigger
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: cd web && npm ci
+      - run: cd web && npx vitest run --coverage
+      - run: cd web && npm run lint
+      - run: cd web && npx tsc --noEmit
+      - run: cd cms && npm ci
+      - run: cd cms && npx tsc --noEmit
+
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy files via rsync over SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          source: '.'
+          target: '~/shuanghong-web'
+          strip_components: 0
+          rm_remote: false
+          overwrite: true
+
+      - name: Install + build + restart on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd ~/shuanghong-web
+            # Pull latest (rsync already did, but ensure submodule/branch state)
+            # Install deps + build (skip if unchanged thanks to package-lock)
+            cd web && npm ci && npm run build
+            cd ../cms && npm ci
+            # Reload PM2 processes (no-downtime)
+            pm2 reload ecosystem.config.cjs
+            # Verify health
+            sleep 5
+            curl -fsS http://127.0.0.1:3000/ > /dev/null && echo "✅ web OK"
+            curl -fsS http://127.0.0.1:1337/api/site-settings > /dev/null && echo "✅ cms OK"
+            pm2 save
+
+  notify:
+    name: Notify
+    needs: deploy
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send webhook
+        run: |
+          curl -X POST "${{ secrets.WEBHOOK_URL }}" \
+            -H 'Content-Type: application/json' \
+            -d '{"text":"❌ Shuanghong deploy failed: ${{ github.workflow }} @ ${{ github.sha }}\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'

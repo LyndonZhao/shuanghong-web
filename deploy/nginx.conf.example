@@ -1,0 +1,109 @@
+# Nginx site config for shuanghongtech.com
+# Drop into /etc/nginx/sites-available/shuanghongtech.com and symlink
+# to /etc/nginx/sites-enabled/, then `nginx -t && systemctl reload nginx`
+#
+# Requires:
+#   - Certbot has issued certs at /etc/letsencrypt/live/shuanghongtech.com/
+#   - Next.js running on 127.0.0.1:3000
+#   - Strapi running on 127.0.0.1:1337 (only exposed to /admin and /api)
+
+# HTTP → HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name shuanghongtech.com www.shuanghongtech.com;
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS main server (public site = Next.js)
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name shuanghongtech.com www.shuanghongtech.com;
+
+    ssl_certificate /etc/letsencrypt/live/shuanghongtech.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/shuanghongtech.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # Static cache (Next.js _next/static + public/)
+    location /_next/static/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    # Public files (logo, etc.)
+    location /public/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    # Strapi admin (separate subdomain or path)
+    location /admin/ {
+        proxy_pass http://127.0.0.1:1337;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        # Strapi admin needs longer timeouts for SSR/HMR
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+
+        # Restrict by IP in production
+        # allow 1.2.3.4;  # office IP
+        # deny all;
+    }
+
+    # Strapi public API (read by Next.js at build time via SSR, not user-facing)
+    location /api/ {
+        proxy_pass http://127.0.0.1:1337;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Strapi uploads
+    location /uploads/ {
+        proxy_pass http://127.0.0.1:1337;
+        proxy_set_header Host $host;
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+
+    # Default → Next.js
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Gzip
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript image/svg+xml;
+
+    # Logs
+    access_log /var/log/nginx/shuanghongtech.com.access.log;
+    error_log /var/log/nginx/shuanghongtech.com.error.log;
+}

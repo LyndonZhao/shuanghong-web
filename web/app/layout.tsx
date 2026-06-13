@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SearchTrigger } from "@/components/SearchTrigger";
+import { AnalyticsInjector } from "@/components/AnalyticsInjector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,10 @@ export default function RootLayout({
       lang="zh-CN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* @ts-expect-error Async Server Component */}
+        <AnalyticsInjector />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {/* @ts-expect-error Async Server Component */}
         <Header />

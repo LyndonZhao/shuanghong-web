@@ -36,3 +36,4 @@ pm2-logs/
 
 # Superpowers brainstorm
 .superpowers/
+.omc/
