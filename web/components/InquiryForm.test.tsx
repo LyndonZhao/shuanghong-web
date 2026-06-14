@@ -77,5 +77,11 @@ describe('InquiryForm', () => {
     expect(btn.textContent).toMatch(/提交中/);
 
     resolveFetch!(new Response(JSON.stringify({ data: { ok: true } }), { status: 200 }));
+
+    // Wait for the success state to render (button is unmounted in success UI),
+    // which flushes the post-resolve setState inside act(...).
+    await waitFor(() => {
+      expect(screen.getByText('提交成功')).toBeInTheDocument();
+    });
   });
 });
