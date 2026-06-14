@@ -87,11 +87,7 @@ export default async function HomePage() {
           {solutions.slice(0, 9).map((s) => (
             <Link
               key={s.id}
-              href={
-                s.category === 'multimodal'
-                  ? `/multimodal#${s.slug}`
-                  : `/ai-application#${s.slug}`
-              }
+              href={`/cases/${s.slug}`}
               className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-brand transition"
             >
               <div className="flex items-center gap-2">

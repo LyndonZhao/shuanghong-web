@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_case_sections",
+  "info": {
+    "displayName": "Case Section",
+    "description": "案例详情页的一个章节：标题 + markdown 正文"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 50000
+    }
+  }
+}

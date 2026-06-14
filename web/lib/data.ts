@@ -73,6 +73,41 @@ export async function getSolutionsByCategory(
   return res.data;
 }
 
+/**
+ * 按 slug 查单条 solution，附带 sections / seo / coverImage。
+ * 用于 /cases/[slug] 详情页。
+ *
+ * 多个 `populate` 字段通过 strapiFetch 展开成多个 query 参数，
+ * 避免 Strapi 5 的嵌套方括号语法在某些版本被拒。
+ */
+export async function getSolutionBySlug(slug: string): Promise<Solution | null> {
+  const res = await strapiFetch<StrapiListResponse<Solution>>('/api/solutions', {
+    revalidate: REVALIDATE,
+    tags: ['solutions', `solution-${slug}`],
+    populate: ['sections', 'coverImage', 'seo'],
+    params: {
+      'filters[slug][$eq]': slug,
+      'pagination[pageSize]': 1,
+    },
+  });
+  return res.data[0] ?? null;
+}
+
+/**
+ * 拉所有 solution 的 slug 列表，用于 generateStaticParams。
+ */
+export async function getAllSolutionSlugs(): Promise<string[]> {
+  const res = await strapiFetch<StrapiListResponse<Pick<Solution, 'slug'>>>(
+    '/api/solutions',
+    {
+      revalidate: REVALIDATE,
+      tags: ['solutions'],
+      params: { 'fields[0]': 'slug', 'pagination[pageSize]': 100 },
+    },
+  );
+  return res.data.map((s) => s.slug).filter((s): s is string => Boolean(s));
+}
+
 export async function getSiteSetting(): Promise<SiteSetting | null> {
   const res = await strapiFetch<StrapiListResponse<SiteSetting>>('/api/site-settings', {
     revalidate: REVALIDATE,

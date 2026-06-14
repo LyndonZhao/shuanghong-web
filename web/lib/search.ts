@@ -24,8 +24,7 @@ export async function buildSearchIndex(): Promise<SearchIndexItem[]> {
     title: s.title,
     category: s.category,
     description: s.description,
-    href:
-      s.category === 'multimodal' ? `/multimodal#${s.slug}` : `/ai-application#${s.slug}`,
+    href: `/cases/${s.slug}`,
     tags: s.tags ?? [],
   }));
 

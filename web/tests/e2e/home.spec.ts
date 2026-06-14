@@ -18,12 +18,12 @@ test.describe('Home page', () => {
     await expect(page.getByRole('link', { name: /智能AI应用解决方案/ })).toBeVisible();
   });
 
-  test('solution cards link to category page', async ({ page }) => {
+  test('solution cards link to /cases/[slug] detail pages', async ({ page }) => {
     await page.goto('/');
 
-    // First solution card should link to /multimodal or /ai-application
+    // 任意 solution 卡片都应链到 /cases/<slug>
     const card = page.getByRole('link', { name: /导览产品/ }).first();
-    await expect(card).toHaveAttribute('href', /\/multimodal/);
+    await expect(card).toHaveAttribute('href', /\/cases\//);
   });
 });
 

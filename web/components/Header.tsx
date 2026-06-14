@@ -5,6 +5,7 @@ const FALLBACK_NAV: { label: string; href: string }[] = [
   { label: '首页', href: '/' },
   { label: '多模态交互', href: '/multimodal' },
   { label: '智能AI应用', href: '/ai-application' },
+  { label: '案例', href: '/cases/manufacturing' },
   { label: '关于双泓', href: '/about' },
 ];
 
