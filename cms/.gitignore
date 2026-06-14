@@ -3,11 +3,13 @@ node_modules/
 .strapi/
 .strapi-updater.json
 types/
-*.db
 exports/
 .cache/
 build/
 .env
 .env.local
 .env.*.local
+
+# DB lives in .cms/db/data.db and is tracked as part of source
+# (intentional: deployments carry the latest content state)
 

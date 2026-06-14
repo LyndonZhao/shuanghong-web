@@ -50,7 +50,7 @@ pm2 restart ecosystem.config.cjs
 ssh shuanghong@server 'nano ~/shuanghong-web/.env && pm2 reload ecosystem.config.cjs'
 
 # Backup SQLite (cron recommended: daily at 03:00)
-cp /home/shuanghong/shuanghong-web/cms/.tmp/data.db /home/shuanghong/backups/data-$(date +%F).db
+cp /home/shuanghong/shuanghong-web/cms/.cms/db/data.db /home/shuanghong/backups/data-$(date +%F).db
 
 # Cert auto-renewal (Certbot sets this up)
 certbot renew --dry-run

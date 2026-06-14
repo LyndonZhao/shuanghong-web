@@ -22,7 +22,7 @@ module.exports = {
         JWT_SECRET: '${JWT_SECRET}',
         ENCRYPTION_KEY: '${ENCRYPTION_KEY}',
         DATABASE_CLIENT: 'sqlite',
-        DATABASE_FILENAME: '.tmp/data.db',
+        DATABASE_FILENAME: '.cms/db/data.db',
         CORS_ORIGINS: 'https://shuanghongtech.com',
         SMTP_HOST: '${SMTP_HOST}',
         SMTP_PORT: '${SMTP_PORT}',
