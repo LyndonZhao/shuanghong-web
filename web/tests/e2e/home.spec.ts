@@ -11,7 +11,7 @@ test.describe('Home page', () => {
     await expect(page.locator('img[alt="双泓科技"]')).toBeVisible();
 
     // Footer copyright
-    await expect(page.getByText(/上海双泓信息科技/)).toBeVisible();
+    await expect(page.getByText(/广州双泓科技/)).toBeVisible();
 
     // 2 CTAs
     await expect(page.getByRole('link', { name: /多模态交互方案/ })).toBeVisible();

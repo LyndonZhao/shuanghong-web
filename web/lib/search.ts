@@ -8,7 +8,7 @@ import type { SearchIndexItem, SearchableSolution, SearchablePage, Solution } fr
 import { getAllSolutions } from './data';
 
 const STATIC_PAGES: SearchablePage[] = [
-  { id: -1, title: '首页', href: '/', excerpt: '上海双泓信息科技官网首页' },
+  { id: -1, title: '首页', href: '/', excerpt: '广州双泓科技官网首页' },
   { id: -2, title: '多模态交互', href: '/multimodal', excerpt: '多模态交互解决方案' },
   { id: -3, title: '智能AI应用', href: '/ai-application', excerpt: 'AI 智能体应用解决方案' },
   { id: -4, title: '关于双泓', href: '/about', excerpt: '关于双泓科技' },

@@ -8,19 +8,19 @@
   "attributes": {
     "phone": {
       "type": "string",
-      "default": "0XX-XXXXXXXX"
+      "default": "+86 130-0637-1314"
     },
     "email": {
       "type": "email",
-      "default": "contact@shuanghongtech.com"
+      "default": "tangsy@sunhorizontech.com"
     },
     "address": {
       "type": "string",
-      "default": "XX省XX市XX区XX大厦XX层"
+      "default": "广州市南沙区中国铁建.凤凰广场A栋24楼"
     },
     "wechatId": {
       "type": "string",
-      "default": "13XXXXXXXXX(微信同号)"
+      "default": "13006371314(微信同号)"
     }
   }
 }

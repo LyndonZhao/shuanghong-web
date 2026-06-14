@@ -89,8 +89,9 @@ const SITE_SETTING = {
     { label: '智能AI应用', href: '/ai-application' },
     { label: '关于双泓', href: '/about' },
   ],
-  footerText: '© 2026 上海双泓信息科技有限公司 版权所有',
-  contactEmailTo: 'sales@shuanghongtech.com',
+  footerText: '© 2026 广州双泓科技有限公司 版权所有',
+  contactEmailTo: 'tangsy@sunhorizontech.com',
+  icpNumber: '粤ICP备2026076444号',
 };
 
 const HOME_PAGE = {

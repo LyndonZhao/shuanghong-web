@@ -266,8 +266,8 @@ seo.meta
   └── ogImage: media (images, single)
 
 contact.info
-  ├── phone: string (default "0XX-XXXXXXXX")
-  ├── email: email (default "contact@shuanghongtech.com")
+  ├── phone: string (default "+86 130-0637-1314")
+  ├── email: email (default "tangsy@sunhorizontech.com")
   ├── address: string
   └── wechatId: string
 ```

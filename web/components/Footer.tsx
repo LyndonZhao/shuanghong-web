@@ -1,6 +1,6 @@
 import { getSiteSetting } from '@/lib/data';
 
-const FALLBACK_FOOTER = '© 2026 上海双泓信息科技有限公司 · 保留所有权利';
+const FALLBACK_FOOTER = '© 2026 广州双泓科技有限公司 · 保留所有权利';
 
 export async function Footer() {
   const site = await getSiteSetting();

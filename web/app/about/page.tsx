@@ -6,7 +6,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: '关于双泓',
-  description: '上海双泓信息科技有限公司专注于多模态交互与 AI 智能体应用,助力行业智能化升级。',
+  description: '广州双泓科技有限公司专注于多模态交互与 AI 智能体应用,助力行业智能化升级。',
 };
 
 export default async function AboutPage() {
@@ -46,10 +46,10 @@ export default async function AboutPage() {
                 如果您对我们的解决方案感兴趣,或有任何问题需要咨询,请通过以下方式联系我们。
               </p>
               <dl className="mt-8 space-y-4">
-                <ContactRow label="电话" value={contact?.phone ?? '0XX-XXXXXXXX'} />
-                <ContactRow label="邮箱" value={contact?.email ?? 'contact@shuanghongtech.com'} href={`mailto:${contact?.email ?? 'contact@shuanghongtech.com'}`} />
-                <ContactRow label="地址" value={contact?.address ?? 'XX省XX市XX区XX大厦XX层'} />
-                <ContactRow label="微信" value={contact?.wechatId ?? '13XXXXXXXXX(微信同号)'} />
+                <ContactRow label="电话" value={contact?.phone ?? '+86 130-0637-1314'} />
+                <ContactRow label="邮箱" value={contact?.email ?? 'tangsy@sunhorizontech.com'} href={`mailto:${contact?.email ?? 'tangsy@sunhorizontech.com'}`} />
+                <ContactRow label="地址" value={contact?.address ?? '广州市南沙区中国铁建.凤凰广场A栋24楼'} />
+                <ContactRow label="微信" value={contact?.wechatId ?? '13006371314(微信同号)'} />
               </dl>
             </div>
             <div>

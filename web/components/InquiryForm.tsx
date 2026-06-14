@@ -155,7 +155,7 @@ export function InquiryForm() {
 
       {status === 'error' ? (
         <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">
-          提交失败: {errorMsg}。请稍后重试或直接发送邮件至 contact@shuanghongtech.com
+          提交失败: {errorMsg}。请稍后重试或直接发送邮件至 tangsy@sunhorizontech.com
         </div>
       ) : null}
 

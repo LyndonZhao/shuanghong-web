@@ -311,10 +311,10 @@
 
 | 字段 | 中文 | 默认 |
 |---|---|---|
-| `phone` | 公司电话 | "0XX-XXXXXXXX" |
-| `email` | 公司邮箱 | "contact@shuanghongtech.com" |
-| `address` | 公司地址 | "XX省XX市XX区XX大厦XX层" |
-| `wechatId` | 企业微信(可写"微信同号") | "13XXXXXXXXX(微信同号)" |
+| `phone` | 公司电话 | "+86 130-0637-1314" |
+| `email` | 公司邮箱 | "tangsy@sunhorizontech.com" |
+| `address` | 公司地址 | "广州市南沙区中国铁建.凤凰广场A栋24楼" |
+| `wechatId` | 企业微信(可写"微信同号") | "13006371314(微信同号)" |
 
 > ⚠️ 这里的 `email` 是**对外展示**给访客看的联系邮箱,**不是接收询盘通知**的邮箱。
 > 接收询盘的邮箱在 `站点设置.contactEmailTo` + 系统环境变量 `SMTP_TO`,改这两处后请联系开发同事。
@@ -413,7 +413,7 @@
 
 每次有新询盘提交,系统会**自动发邮件**到:
 
-- **收件人**:环境变量 `SMTP_TO`(默认 `sales@shuanghongtech.com`)
+- **收件人**:环境变量 `SMTP_TO`(默认 `tangsy@sunhorizontech.com`)
 - **抄送**:无
 - **发件人**:`noreply@shuanghongtech.com`(走腾讯企业邮箱 `smtp.exmail.qq.com`)
 - **邮件内容**:客户姓名、公司、邮箱、感兴趣方向、留言、来源页 + 一键跳后台链接
@@ -493,11 +493,11 @@
 | `logo` | 网站 Logo 图 | 媒体 | (默认 SVG) |
 | `logoSubtitle` | Logo 旁边的副标语 | 短文本 | "多模态交互专家｜智能AI应用普及者" |
 | `navMenu` | **顶部导航菜单**(JSON) | JSON | 见下 |
-| `footerText` | 页脚版权信息 | 富文本 | "© 2026 上海双泓信息科技有限公司 版权所有" |
+| `footerText` | 页脚版权信息 | 富文本 | "© 2026 广州双泓科技有限公司 版权所有" |
 | `icpNumber` | **ICP 备案号** | 短文本 | (空,**请尽快填写**) |
 | `analyticsBaidu` | 百度统计代码片段 | 长文本 | (空) |
 | `analyticsGa` | Google Analytics 跟踪 ID | 短文本 | (空) |
-| `contactEmailTo` | 询盘默认收件邮箱 | 邮箱 | `sales@shuanghongtech.com` |
+| `contactEmailTo` | 询盘默认收件邮箱 | 邮箱 | `tangsy@sunhorizontech.com` |
 
 ### 11.2 关键字段详解
 
@@ -533,7 +533,7 @@ JSON 数组,每个元素是 `{ label, href }`。当前内容:
 
 #### 11.2.2 icpNumber(ICP 备案号)
 
-格式示例:`沪ICP备2024XXXXXX号-1`(填一行完整字符串)。
+格式示例:`粤ICP备2024XXXXXX号-1`(填一行完整字符串)。
 **法律要求**:中国大陆服务器部署的网站**必须**在页脚显示备案号,运营务必确认填写。
 
 #### 11.2.3 analyticsBaidu / analyticsGa(网站统计)
@@ -547,9 +547,9 @@ JSON 数组,每个元素是 `{ label, href }`。当前内容:
 富文本,常用结构:
 
 ```
-© 2026 上海双泓信息科技有限公司 版权所有
+© 2026 广州双泓科技有限公司 版权所有
 [ICP 备案号占位 - 由 icpNumber 字段输出]
-联系电话:0XX-XXXXXXXX
+联系电话:+86 130-0637-1314
 ```
 
 ### 11.3 修改 Logo
@@ -806,7 +806,7 @@ JSON 数组,每个元素是 `{ label, href }`。当前内容:
 | 超级管理员 | (待填写) | `hui85201@gmail.com` |
 | 技术开发 | (待填写) | (待填写) |
 | 运维 | (待填写) | (待填写) |
-| 销售线索接收 | 销售部门 | `sales@shuanghongtech.com` |
+| 销售线索接收 | 销售部门 | `tangsy@sunhorizontech.com` |
 
 ---
 

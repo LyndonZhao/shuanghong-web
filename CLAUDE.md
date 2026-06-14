@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-双泓科技官网 (shuanghongtech.com) — corporate site for Shanghai Shuanghong Info Tech.
+双泓科技官网 (shuanghongtech.com) — corporate site for Guangzhou Shuanghong Tech.
 **Stack:** Next.js 16 (frontend, port 3000) + Strapi 5.48 (CMS, port 1337) + SQLite + Tailwind 4 + fuse.js (client search) + Cloudflare Turnstile (form spam protection).
 
 Deploys to a single Volcengine ECS box (Ubuntu 22.04) behind Nginx + PM2; CI/CD via GitHub Actions SSH.

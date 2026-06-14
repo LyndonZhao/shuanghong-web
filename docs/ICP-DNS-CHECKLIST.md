@@ -32,14 +32,14 @@
 6. **提交初审**: 火山引擎 1-2 工作日内审核
 7. **工信部短信核验**: 初审通过后会收到工信部短信,需 24 小时内访问短信中的链接验证
 8. **管局审核**: 15-20 工作日
-9. **备案成功**: 获得 ICP 备案号(格式:`沪ICP备XXXXXXXX号`)
+9. **备案成功**: 获得 ICP 备案号(格式:`粤ICP备XXXXXXXX号`)
 
 ### 关键信息(请填写)
 
 ```
-主办单位名称: 上海双泓信息科技有限公司
+主办单位名称: 广州双泓科技有限公司
 主办单位性质: 企业
-网站名称: 上海双泓信息科技官网
+网站名称: 广州双泓科技官网
 网站首页: https://shuanghongtech.com/
 域名列表: shuanghongtech.com, www.shuanghongtech.com
 服务类型: 网站应用
@@ -86,7 +86,7 @@ ICP 备案成功后,需要把备案号添加到网站底部:
 
 访问 http://localhost:1337/admin → Content Manager → Site Setting:
 - 字段: `icpNumber`
-- 值: `沪ICP备XXXXXXXX号-1`(注意 `-1` 后缀,子域名前缀)
+- 值: `粤ICP备XXXXXXXX号-1`(注意 `-1` 后缀,子域名前缀)
 
 ### 2. Footer 已自动显示
 
@@ -95,7 +95,7 @@ ICP 备案成功后,需要把备案号添加到网站底部:
 ## ✅ 完成检查
 
 - [ ] ICP 备案成功(收到工信部邮件)
-- [ ] 备案号格式正确(沪ICP备XXXX号-1)
+- [ ] 备案号格式正确(粤ICP备XXXX号-1)
 - [ ] DNS A 记录已添加
 - [ ] DNS 生效(`dig` 返回 ECS IP)
 - [ ] Strapi SiteSetting 已填入 ICP 备案号

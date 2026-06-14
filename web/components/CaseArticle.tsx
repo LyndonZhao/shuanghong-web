@@ -18,7 +18,7 @@ export function CaseArticle({ solution }: CaseArticleProps): ReactElement {
     backHref: '/',
   };
   const contactEmail =
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'contact@shuanghongtech.com';
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'tangsy@sunhorizontech.com';
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-12 sm:py-16">

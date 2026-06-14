@@ -18,11 +18,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | 上海双泓信息科技",
-    default: "上海双泓信息科技 | 多模态交互专家 · 智能AI应用普及者",
+    template: "%s | 广州双泓科技",
+    default: "广州双泓科技 | 多模态交互专家 · 智能AI应用普及者",
   },
   description:
-    "上海双泓信息科技有限公司专注于汽车与机器人领域的多模态交互解决方案,以及制造、建筑业的智能 AI 应用。",
+    "广州双泓科技有限公司专注于汽车与机器人领域的多模态交互解决方案,以及制造、建筑业的智能 AI 应用。",
   icons: {
     icon: "/logo.png",
   },

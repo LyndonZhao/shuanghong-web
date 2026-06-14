@@ -13,7 +13,7 @@ export default {
     const { result } = event;
     try {
       await strapi.plugins['email'].services.email.send({
-        to: process.env.SMTP_TO || 'sales@shuanghongtech.com',
+        to: process.env.SMTP_TO || 'tangsy@sunhorizontech.com',
         from: process.env.SMTP_FROM,
         subject: `🔔 新询盘 - ${result.company} - ${result.interest}`,
         html: `
