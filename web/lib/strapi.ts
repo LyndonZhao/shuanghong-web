@@ -14,8 +14,12 @@ export interface FetchOptions {
   revalidate?: number | false;
   /** Cache tag for revalidateTag() (Next 15+). */
   tags?: string[];
-  /** Query params like `?populate=*` or `?populate[solutions]=*`. */
-  populate?: string;
+  /**
+   * Strapi `populate` 字段。Strapi 5 不接受逗号分隔，所以传数组会展开为
+   * 多个 `?populate=xxx` 查询参数（如 `populate: ['sections', 'seo']`）。
+   * 单个字符串 `'*'` 或 `'solutions'` 也仍然有效。
+   */
+  populate?: string | string[];
   /** Other query params to append. */
   params?: Record<string, string | number | boolean | undefined>;
 }
@@ -42,7 +46,10 @@ export async function strapiFetch<T = unknown>(
   const url = new URL(path, getStrapiUrl());
 
   if (populate) {
-    url.searchParams.append('populate', populate);
+    const populateList = Array.isArray(populate) ? populate : [populate];
+    for (const p of populateList) {
+      url.searchParams.append('populate', p);
+    }
   }
 
   if (params) {

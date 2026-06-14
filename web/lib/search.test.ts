@@ -37,7 +37,7 @@ describe('buildSearchIndex', () => {
       type: 'solution',
       id: 1,
       title: '导览产品',
-      href: '/multimodal#tour-guide',
+      href: '/cases/tour-guide',
     });
 
     const home = index.find((i) => i.type === 'page' && i.href === '/');
@@ -53,7 +53,7 @@ describe('buildSearchIndex', () => {
     const index = await buildSearchIndex();
     const item = index.find((i) => i.type === 'solution');
 
-    expect(item?.href).toBe('/ai-application#ai-patent');
+    expect(item?.href).toBe('/cases/ai-patent');
   });
 
   it('handles solutions with no tags', async () => {

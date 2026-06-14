@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Solution } from '@/lib/types';
 
 interface SolutionGridProps {
@@ -29,10 +30,10 @@ export function SolutionGrid({ solutions, showCategory = true, category }: Solut
       {filtered.map((s) => {
         const cat = CATEGORY_LABEL[s.category] ?? { label: s.category, color: 'bg-gray-100 text-gray-700' };
         return (
-          <article
+          <Link
             key={s.id}
-            id={s.slug}
-            className="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-brand transition"
+            href={`/cases/${s.slug}`}
+            className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-brand transition"
           >
             <div className="flex items-center justify-between">
               {showCategory ? (
@@ -48,7 +49,10 @@ export function SolutionGrid({ solutions, showCategory = true, category }: Solut
             <p className="mt-2 text-sm text-muted-foreground line-clamp-4">
               {s.description}
             </p>
-          </article>
+            <span className="mt-4 inline-flex items-center text-sm text-brand opacity-0 group-hover:opacity-100 transition">
+              查看详情 →
+            </span>
+          </Link>
         );
       })}
     </div>

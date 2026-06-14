@@ -45,6 +45,11 @@
       "type": "component",
       "repeatable": false,
       "component": "seo.meta"
+    },
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case.section"
     }
   }
 }

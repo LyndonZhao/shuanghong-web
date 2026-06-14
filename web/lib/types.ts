@@ -87,6 +87,17 @@ export interface AboutPage {
 
 export type SolutionCategory = 'multimodal' | 'ai_application';
 
+/**
+ * 案例详情页章节：标题 + markdown 正文。
+ * body 字段是普通 text（不是 richtext），因为章节里含表格 / ASCII 流程图，
+ * 渲染端用 react-markdown + remark-gfm 处理。
+ */
+export interface CaseSection {
+  id: number;
+  heading: string;
+  body: string;
+}
+
 export interface Solution {
   id: number;
   documentId?: string;
@@ -98,6 +109,7 @@ export interface Solution {
   order: number;
   tags?: string[] | null;
   seo?: SEOComponent | null;
+  sections?: CaseSection[];
 }
 
 export interface SiteSetting {
