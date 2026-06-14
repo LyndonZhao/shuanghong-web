@@ -21,7 +21,7 @@ describe('getSolutionBySlug', () => {
               id: 10,
               documentId: 'doc-1',
               title: '制造业 AI 落地服务',
-              slug: 'manufacturing-ai-landing',
+              slug: 'manufacturing',
               category: 'ai_application',
               order: 10,
               sections: [{ id: 1, heading: '我们做什么', body: '...' }],
@@ -33,7 +33,7 @@ describe('getSolutionBySlug', () => {
       ),
     );
 
-    const solution = await getSolutionBySlug('manufacturing-ai-landing');
+    const solution = await getSolutionBySlug('manufacturing');
 
     expect(solution).not.toBeNull();
     expect(solution?.title).toBe('制造业 AI 落地服务');
@@ -42,7 +42,7 @@ describe('getSolutionBySlug', () => {
 
     // 验证 URL 拼接：filters + populate 各作为独立 query 参数
     const calledUrl = mockFetch.mock.calls[0][0] as string;
-    expect(calledUrl).toContain('filters%5Bslug%5D%5B%24eq%5D=manufacturing-ai-landing');
+    expect(calledUrl).toContain('filters%5Bslug%5D%5B%24eq%5D=manufacturing');
     // 多个 populate 字段应作为独立 query 参数传递
     const matches = calledUrl.match(/populate=[^&]+/g) ?? [];
     expect(matches.length).toBeGreaterThanOrEqual(3);
@@ -85,8 +85,8 @@ describe('getAllSolutionSlugs', () => {
       new Response(
         JSON.stringify({
           data: [
-            { slug: 'manufacturing-ai-landing' },
-            { slug: 'case-ai-patent' },
+            { slug: 'manufacturing' },
+            { slug: 'first-patent' },
             { slug: '' }, // 空 slug 应被过滤
           ],
           meta: { pagination: { page: 1, pageSize: 100, pageCount: 1, total: 3 } },
@@ -96,6 +96,6 @@ describe('getAllSolutionSlugs', () => {
     );
 
     const slugs = await getAllSolutionSlugs();
-    expect(slugs).toEqual(['manufacturing-ai-landing', 'case-ai-patent']);
+    expect(slugs).toEqual(['manufacturing', 'first-patent']);
   });
 });

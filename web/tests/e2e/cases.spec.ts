@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Case detail pages (/cases/[slug])', () => {
   test('manufacturing detail page renders all 7 sections + tables + mailto CTA', async ({ page }) => {
-    await page.goto('/cases/manufacturing-ai-landing');
+    await page.goto('/cases/manufacturing');
 
     // H1 标题
     await expect(page.getByRole('heading', { level: 1 })).toContainText('制造业 AI 落地服务');
@@ -24,7 +24,7 @@ test.describe('Case detail pages (/cases/[slug])', () => {
   });
 
   test('drawing-review page has 8 sections with H3 nested sub-sections', async ({ page }) => {
-    await page.goto('/cases/case-ai-drawing-review');
+    await page.goto('/cases/drawing-review');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('AI 图纸审核');
     await expect(page.getByRole('heading', { level: 2 })).toHaveCount(8);
     // H3 子章节（来自核心能力 ### 1. ...）
@@ -33,17 +33,17 @@ test.describe('Case detail pages (/cases/[slug])', () => {
   });
 
   test('first-patent page has 6 sections including steps with H3', async ({ page }) => {
-    await page.goto('/cases/case-ai-patent');
+    await page.goto('/cases/first-patent');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('写出第一篇专利');
     await expect(page.getByRole('heading', { level: 2 })).toHaveCount(6);
   });
 
   test('returns to correct category list page from back link', async ({ page }) => {
-    await page.goto('/cases/case-ai-patent');
+    await page.goto('/cases/first-patent');
     await page.getByRole('link', { name: /返回智能 AI 应用/ }).click();
     await expect(page).toHaveURL('/ai-application');
 
-    await page.goto('/cases/dual-system-contract-linkage');
+    await page.goto('/cases/double-system');
     await page.getByRole('link', { name: /返回多模态交互/ }).click();
     await expect(page).toHaveURL('/multimodal');
   });
@@ -60,7 +60,7 @@ test.describe('List page → case detail navigation', () => {
     await page.goto('/ai-application');
     const card = page.getByRole('link', { name: /制造业 AI 落地服务/ }).first();
     await card.click();
-    await expect(page).toHaveURL('/cases/manufacturing-ai-landing');
+    await expect(page).toHaveURL('/cases/manufacturing');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('制造业 AI 落地服务');
   });
 
@@ -68,7 +68,7 @@ test.describe('List page → case detail navigation', () => {
     await page.goto('/multimodal');
     const card = page.getByRole('link', { name: /双系统强契约联动/ }).first();
     await card.click();
-    await expect(page).toHaveURL('/cases/dual-system-contract-linkage');
+    await expect(page).toHaveURL('/cases/double-system');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('双系统强契约联动');
   });
 });
@@ -79,11 +79,11 @@ test.describe('SEO', () => {
     expect(res.status()).toBe(200);
     const text = await res.text();
     for (const slug of [
-      'manufacturing-ai-landing',
-      'case-ai-drawing-review',
-      'case-ai-quoting',
-      'case-ai-patent',
-      'dual-system-contract-linkage',
+      'manufacturing',
+      'drawing-review',
+      'quotation',
+      'double-system',
+      'first-patent',
     ]) {
       expect(text).toContain(`/cases/${slug}`);
     }
