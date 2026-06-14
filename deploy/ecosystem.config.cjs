@@ -13,7 +13,7 @@ module.exports = {
       args: 'run start',
       env: {
         NODE_ENV: 'production',
-        HOST: '127.0.0.1',
+        HOST: '0.0.0.0',
         PORT: 1337,
         APP_KEYS: '${APP_KEYS}',
         API_TOKEN_SALT: '${API_TOKEN_SALT}',
