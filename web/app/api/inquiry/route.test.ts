@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { NextRequest } from 'next/server';
 import { POST } from './route';
 
-function makeReq(body: unknown, headers: Record<string, string> = {}): Request {
-  return new Request('http://localhost:3000/api/inquiry', {
+function makeReq(body: unknown, headers: Record<string, string> = {}): NextRequest {
+  return new NextRequest('http://localhost:3000/api/inquiry', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...headers },
     body: JSON.stringify(body),
@@ -17,11 +18,11 @@ describe('POST /api/inquiry', () => {
   });
 
   it('returns 400 on invalid JSON', async () => {
-    const req = new Request('http://localhost/api/inquiry', {
+    const req = new NextRequest('http://localhost/api/inquiry', {
       method: 'POST',
       body: 'not json',
     });
-    const res = await POST(req as any);
+    const res = await POST(req);
     expect(res.status).toBe(400);
   });
 

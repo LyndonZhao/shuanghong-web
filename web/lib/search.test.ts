@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type { Solution } from './types';
 
 vi.mock('./data', () => ({
   getAllSolutions: vi.fn(),
@@ -24,8 +25,8 @@ describe('buildSearchIndex', () => {
         order: 1,
         description: '智慧导览解决方案',
         tags: ['机器人'],
-      },
-    ] as any);
+      } satisfies Solution,
+    ]);
 
     const index = await buildSearchIndex();
 
@@ -47,7 +48,13 @@ describe('buildSearchIndex', () => {
 
   it('routes ai_application solutions to /ai-application', async () => {
     mockGetAllSolutions.mockResolvedValue([
-      { id: 2, title: 'AI 辅助专利撰写', slug: 'ai-patent', category: 'ai_application', order: 5 } as any,
+      {
+        id: 2,
+        title: 'AI 辅助专利撰写',
+        slug: 'ai-patent',
+        category: 'ai_application',
+        order: 5,
+      } satisfies Solution,
     ]);
 
     const index = await buildSearchIndex();
@@ -58,7 +65,14 @@ describe('buildSearchIndex', () => {
 
   it('handles solutions with no tags', async () => {
     mockGetAllSolutions.mockResolvedValue([
-      { id: 3, title: 'Test', slug: 't', category: 'multimodal', order: 1, tags: null } as any,
+      {
+        id: 3,
+        title: 'Test',
+        slug: 't',
+        category: 'multimodal',
+        order: 1,
+        tags: null,
+      } satisfies Solution,
     ]);
 
     const index = await buildSearchIndex();

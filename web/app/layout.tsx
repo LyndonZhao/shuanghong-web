@@ -39,16 +39,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        {/* @ts-expect-error Async Server Component */}
         <AnalyticsInjector />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {/* @ts-expect-error Async Server Component */}
         <Header />
         {children}
-        {/* @ts-expect-error Async Server Component */}
         <Footer />
-        {/* @ts-expect-error Async Server Component */}
         <SearchTrigger />
       </body>
     </html>

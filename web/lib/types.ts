@@ -1,6 +1,6 @@
 /**
  * Strapi content type definitions.
- * Mirrors cms/src/api/*/content-types/*/schema.json
+ * Mirrors cms/src/api/<type>/content-types/<type>/schema.json
  *
  * Strapi 5 wraps every entry in `{ id, documentId, ...attributes, createdAt, updatedAt, publishedAt }`
  * and lists in `{ data: T[], meta: { pagination } }`.

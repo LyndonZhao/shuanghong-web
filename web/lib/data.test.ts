@@ -120,7 +120,7 @@ describe('single-type fetchers', () => {
     mockFetch.mockResolvedValue(
       new Response(
         JSON.stringify({
-          data: { id: 1, documentId: 'h1', heroTitle: '首页' },
+          data: { id: 1, documentId: 'h1', heroTitleLine1: '首页' },
           meta: {},
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } },
@@ -128,7 +128,7 @@ describe('single-type fetchers', () => {
     );
 
     const home = await getHomePage();
-    expect(home?.heroTitle).toBe('首页');
+    expect(home?.heroTitleLine1).toBe('首页');
     const url = mockFetch.mock.calls[0][0] as string;
     expect(url).toContain('/api/home-page');
   });

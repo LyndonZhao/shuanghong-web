@@ -6,30 +6,28 @@ import type { SearchIndexItem } from '@/lib/types';
 const items: SearchIndexItem[] = [
   {
     type: 'solution',
-    id: '1',
+    id: 1,
     title: '制造业 AI 落地',
+    category: 'ai_application',
     description: '为制造业提供 AI 质检与排产',
-    excerpt: '',
     href: '/cases/manufacturing',
     tags: ['AI', '制造业'],
   },
   {
     type: 'solution',
-    id: '2',
+    id: 2,
     title: '智能报价',
+    category: 'ai_application',
     description: 'AI 辅助生成报价单',
-    excerpt: '',
     href: '/cases/quotation',
     tags: ['AI'],
   },
   {
     type: 'page',
-    id: '3',
+    id: 3,
     title: '关于双泓',
-    description: '',
     excerpt: '公司简介',
     href: '/about',
-    tags: [],
   },
 ];
 
@@ -67,10 +65,10 @@ describe('CommandPalette', () => {
   it('shows up to 8 items by default', () => {
     const many: SearchIndexItem[] = Array.from({ length: 12 }, (_, i) => ({
       type: 'solution',
-      id: String(i),
+      id: i,
       title: `方案 ${i}`,
+      category: 'multimodal',
       description: '',
-      excerpt: '',
       href: `/cases/${i}`,
       tags: [],
     }));
